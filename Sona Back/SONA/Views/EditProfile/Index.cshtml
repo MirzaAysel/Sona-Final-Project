@@ -1,0 +1,65 @@
+@model SONA.ViewModels.UserVM
+
+<title>Edit Profile</title>
+<link rel="stylesheet" href="~/assets/pages/edit-profile/styles/edit-profile.style.css">
+<section id="edit-profile">
+    <div class="container py-5">
+        <h1 class="text-center">Edit Profile</h1>
+        <div class="bt-option mb-5 text-center">
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <i class="fa-solid fa-angle-right"></i>
+            <a asp-controller="MyProfile" asp-action="Index">My Profile</a>
+            <i class="fa-solid fa-angle-right"></i>
+            <span>Edit Profile</span>
+        </div>
+        <div class="edit-profile__container py-5">
+            <form enctype="multipart/form-data" method="post">
+                <div class="profile-img me-3 d-flex justify-content-center mb-5">
+                    <div
+                        style="width: 150px; height: 150px"
+                        class="rounded-circle position-relative">
+                        <input class="img-upload" asp-for="ImageFile"/>
+                        <img
+                            src="~/uploads/users/@Model.Image"
+                            class="rounded-circle"
+                            height="150"
+                            width="150"
+                            alt="Avatar"
+                            loading="lazy"/>
+                        <h5 class="text-center mt-2">Edit Photo</h5>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-7">
+
+                        <div class="input-group flex-column mb-3">
+                            <label asp-for="FirstName">Edit First Name</label>
+                            <input
+                                asp-for="FirstName"
+                                class="form-control rounded-0 w-100"/>
+                        </div>
+                        <div class="input-group flex-column mb-3">
+                            <label asp-for="LastName">Edit Last Name</label>
+                            <input
+                                asp-for="LastName"
+                                class="form-control rounded-0 w-100"/>
+                        </div>
+                        <div class="input-group flex-column mb-3">
+                            <label asp-for="Email">Edit Email address</label>
+                            <input
+                                asp-for="Email"
+                                class="form-control rounded-0 w-100"/>
+                            <span class="my-3 fw-bold text-danger" asp-validation-for="Email"></span>
+                        </div>
+                        <button class="btn btn-warning rounded-0 w-100">
+                            Save Changes
+                        </button>
+
+                        <div class="my-3 text-danger fw-bold" asp-validation-summary="ModelOnly"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>

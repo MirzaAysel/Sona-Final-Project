@@ -1,0 +1,18 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model DAL.Models.Setting
+
+<div class="container">
+    <div class="row py-5 justify-content-center">
+        <div class="col-8">
+            <form method="post">
+                <div class="mb-3">
+                    <label asp-for="Value" class="form-label"></label>
+                    <input asp-for="Value" class="form-control" placeholder="value">
+                    <span asp-validation-for="Value" class="my-2 text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+                <a asp-area="Admin" asp-controller="Setting" asp-action="Index" class="btn btn-primary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

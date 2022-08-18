@@ -1,0 +1,109 @@
+@model SONA.ViewModels.PaymentVM
+<title>Checkout Details</title>
+<link rel="stylesheet" href="~/assets/library/CardJs-master/card-js.min.css">
+<link rel="stylesheet" href="~/assets/pages/checkout-details/styles/checkout-details.style.css">
+<!-- * Checkout Details -->
+<section id="checkout-details-section">
+    <div class="container py-5">
+        <h1 class="text-center">Checkout Details</h1>
+        <div class="bt-option mb-5 text-center">
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <i class="fa-solid fa-angle-right"></i>
+            <span>Checkout Details</span>
+        </div>
+        <div class="checkout-details">
+            <div class="row">
+                <div class="my-3 my-lg-0 col-lg-6">
+                    <div class="booking-details px-4 px-lg-5 py-5">
+                        <h3>Booking Details</h3>
+                        <hr/>
+                        <ul class="checkout-list">
+                            <li class="list">
+                                <span class="regular"> Room </span>
+                                <span class="strong"> @ViewBag.Data.Room.Name </span>
+                            </li>
+                            <li class="list">
+                                <span class="regular"> Checking In </span>
+                                <span class="strong"> @ViewBag.Data.Reservation.CheckIn.ToString().Substring(0, 10)</span>
+                            </li>
+                            <li class="list">
+                                <span class="regular"> Checking Out </span>
+                                <span class="strong"> @ViewBag.Data.Reservation.CheckOut.ToString().Substring(0, 10) </span>
+                            </li>
+                            <li class="list">
+                                <span class="regular"> Number of Rooms </span>
+                                <span class="strong"> @ViewBag.Data.Reservation.RoomId </span>
+                            </li>
+                            <li class="list">
+                                <span class="regular"> Total Stay </span>
+                                <span class="strong"> @((DateTime.Parse(ViewBag.Data.Reservation.CheckOut.ToString()) - DateTime.Parse(ViewBag.Data.Reservation.CheckIn.ToString())).Days) Days </span>
+                            </li>
+                            <li class="list">
+                                <span class="regular"> Number of Person </span>
+                                <span class="strong"> @ViewBag.Data.Reservation.GuestCount Person </span>
+                            </li>
+                            <li class="list">
+                                <span class="regular"> Room Count </span>
+                                <span class="strong"> @ViewBag.Data.Reservation.RoomCount </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="my-3 my-lg-0 col-lg-6">
+                    <div class="invoice px-4 px-lg-5 py-5">
+                        <h3>Invoice</h3>
+                        <hr/>
+                        <ul class="checkout-list pt-3 mt-3">
+                            <li class="list">
+                                <span class="regular"> Charge </span>
+                                <span class="strong"> $@(ViewBag.Data.Room.Price*((DateTime.Parse(ViewBag.Data.Reservation.CheckOut.ToString()) - DateTime.Parse(ViewBag.Data.Reservation.CheckIn.ToString())).Days)) </span>
+                            </li>
+                            <li class="list">
+                                <span class="regular"> Discount </span>
+                                <span class="strong"> -$@((ViewBag.Data.Room.Price - ViewBag.Data.Room.DiscountPrice)*((DateTime.Parse(ViewBag.Data.Reservation.CheckOut.ToString()) - DateTime.Parse(ViewBag.Data.Reservation.CheckIn.ToString())).Days)) </span>
+                            </li>
+                        </ul>
+                        <hr/>
+                        <ul class="checkout-list pt-3 mt-3">
+                            <li class="list">
+                                <span class="regular"> Total </span>
+                                <span class="fw-bold color-one fs-5 text-primary">
+                                    $@((ViewBag.Data.Room.Price - (ViewBag.Data.Room.Price - ViewBag.Data.Room.DiscountPrice))*((DateTime.Parse(ViewBag.Data.Reservation.CheckOut.ToString()) - DateTime.Parse(ViewBag.Data.Reservation.CheckIn.ToString())).Days))
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-3 col-12">
+                    <div class="payment px-4 px-lg-5 py-5">
+                        <h3>Payment</h3>
+                        <hr/>
+                        <form method="post">
+                            <div class="card-js">
+                                <input class="card-number my-custom-class" asp-for="CardNumber">
+                                <span asp-validation-for="CardNumber" class="my-3 text-danger"></span>
+                                <input class="name" id="the-card-name-id" asp-for="CardName" placeholder="Name on card">
+                                <span asp-validation-for="CardName" class="my-3 text-danger"></span>
+                                <input class="expiry-month" asp-for="ExpireMonth">
+                                <span asp-validation-for="ExpireMonth" class="my-3 text-danger"></span>
+                                <input class="expiry-year" asp-for="ExpireYear">
+                                <span asp-validation-for="ExpireYear" class="my-3 text-danger"></span>
+                                <input class="cvc" name="cvc" asp-for="CardCvc">
+                                <span asp-validation-for="CardCvc" class="my-3 text-danger"></span>
+                            </div>
+                            <button type="submit" class="mt-3" asp-controller="Room" asp-action="Checkout" asp-route-id="@ViewBag.Data.Reservation.Id" >Pay & Confirm</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- * End Checkout Details -->
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+<script src="~/assets/library/CardJs-master/card-js.min.js"></script>

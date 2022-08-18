@@ -1,0 +1,51 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Common
+@model IPagedList<DAL.Models.Setting>;
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 py-5">
+            <table class="table table-dark table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Key</th>
+                    <th>Value</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>#@product.Id</td>
+                        <td>@product.Key</td>
+                        <td>@product.Value</td>
+                        <td class="d-flex flex-column">
+                            <a class="btn btn-warning my-2" asp-area="Admin" asp-controller="Setting" asp-action="Update" asp-route-id="@product.Id">Update</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+            <div class="pull-right d-flex justify-content-center">
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index",
+                    new
+                    {
+                        page,
+                        search = Context.Request.Query["search"]
+                    }),
+                    new PagedListRenderOptionsBase
+                    {
+                        LiElementClasses = new string[] { "page-item" },
+                        PageClasses = new string[] { "page-link" },
+                        Display = PagedListDisplayMode.IfNeeded
+           
+                    })
+            </div>
+
+        </div>
+    </div>
+</div>

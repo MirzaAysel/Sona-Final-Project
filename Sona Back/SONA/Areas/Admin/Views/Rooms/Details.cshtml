@@ -1,0 +1,92 @@
+@model DAL.Models.Room
+
+<style>
+    #rooms .room-items .room-item {
+      margin-bottom: 30px;
+    }
+    #rooms .room-items .room-item img {
+      min-width: 100%;
+    }
+    #rooms .room-items .room-item .ri-text {
+      border: 1px solid #ebebeb;
+      border-top: none;
+      padding: 24px 24px 30px 28px;
+    }
+  
+    #rooms .room-items .room-item .ri-text table {
+      margin-bottom: 18px;
+    }
+    #rooms .room-items .room-item .ri-text table td.r-o {
+      width: 125px;
+    }
+    #rooms .room-items .room-item .ri-text table td {
+      font-size: 16px;
+      color: #707079;
+      line-height: 36px;
+    }
+    #rooms .room-items .room-item .ri-text h4 {
+      color: #19191a;
+      margin-bottom: 17px;
+      font-size: 24px;
+      font-weight: 400;
+      font-family: "Lora", serif;
+    }
+    #rooms .room-items .room-item .ri-text h3 {
+      color: #dfa974;
+      font-weight: 700;
+      margin-bottom: 14px;
+      font-size: 30px;
+      font-family: "Lora", serif;
+    }
+    #rooms .room-items .room-item .ri-text h3 span {
+      font-family: "Cabin", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #19191a;
+    }
+</style>
+<div id="rooms" class="py-5">
+    <div class="room-items">
+        <div class="row justify-content-center">
+            <div class="col-8 px-3">
+                <div class="mb-3">
+                    <a asp-area="Admin" asp-controller="Rooms" asp-action="Index" class="btn btn-primary">Cancel</a>
+                </div>
+                <div class="room-item">
+                    <img
+                        src="~/uploads/rooms/@Model.Image"
+                        alt=""
+                        class="img-fluid"/>
+                    <div class="ri-text">
+                        <h4>@Model.Name</h4>
+                        <h3>@Model.Price$<span>/Pernight</span></h3>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td class="r-o">Size:</td>
+                                <td>@Model.Size ft</td>
+                            </tr>
+                            <tr>
+                                <td class="r-o">Capacity:</td>
+                                <td>Max persion @Model.Capacity</td>
+                            </tr>
+                            <tr>
+                                <td class="r-o">Bed:</td>
+                                <td>@Model.Bed</td>
+                            </tr>
+                            <tr>
+                                <td class="r-o">Services:</td>
+                                <td>@Model.Services</td>
+                            </tr>
+                            <tr>
+                                <td class="r-o">Count:</td>
+                                <td>@Model.Count</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

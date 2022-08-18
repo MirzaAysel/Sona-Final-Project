@@ -1,0 +1,48 @@
+@model DAL.Models.Blog;
+
+<div class="container">
+
+    <div class="row py-5 justify-content-center">
+        <div class="col-8">
+            <h1 class="mb-3">Create A Blog</h1>
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label"></label>
+                    <input asp-for="Title" class="form-control" placeholder="title">
+                    <span asp-validation-for="Title" class="my-3 text-danger fw-bold"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Author" class="form-label"></label>
+                    <input asp-for="Author" class="form-control" placeholder="author">
+                    <span asp-validation-for="Author" class="my-3 text-danger fw-bold"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Tag" class="form-label">Tag</label>
+                    <input asp-for="Tag" class="form-control" placeholder="tag">
+                    <span asp-validation-for="Tag" class="my-3 text-danger fw-bold"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ImageFile" class="form-label">Image</label>
+                    <input asp-for="ImageFile" class="form-control">
+                    <span asp-validation-for="ImageFile" class="my-3 fw-bold text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Content" class="form-label">Room Size</label>
+                    <textarea asp-for="Content" id="editor" class="form-control" placeholder="content"></textarea>
+                    <span asp-validation-for="Content" class="my-3 fw-bold text-danger"></span>
+                </div>
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-success me-3">Submit</button>
+                    <a asp-area="Admin" asp-controller="Blogs" asp-action="Index" class="btn btn-primary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section CkEditor {
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+    <script >
+        ClassicEditor.create( document.querySelector( '#editor' ));
+    </script>
+}

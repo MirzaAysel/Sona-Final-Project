@@ -1,0 +1,62 @@
+@model DAL.Models.Room;
+
+<div class="container">
+
+    <div class="row py-5 justify-content-center">
+        <div class="col-8">
+            <h1 class="mb-3">Create A Room</h1>
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" placeholder="name">
+                    <span asp-validation-for="Name" class="my-3 text-danger fw-bold"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label"></label>
+                    <input asp-for="Price" class="form-control" placeholder="price">
+                    <span asp-validation-for="Price" class="my-3 text-danger fw-bold"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="DiscountPrice" class="form-label">Discount Price</label>
+                    <input asp-for="DiscountPrice" class="form-control" placeholder="discount price">
+                    <span asp-validation-for="DiscountPrice" class="my-3 text-danger fw-bold"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ImageFile" class="form-label">Image</label>
+                    <input asp-for="ImageFile" class="form-control" placeholder="product image">
+                    <span asp-validation-for="ImageFile" class="my-3 fw-bold text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Size" class="form-label">Room Size</label>
+                    <input asp-for="Size" class="form-control" placeholder="room size">
+                    <span asp-validation-for="Size" class="my-3 fw-bold text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Capacity" class="form-label">Room Capacity</label>
+                    <input asp-for="Capacity" class="form-control" placeholder="room capacity">
+                    <span asp-validation-for="Capacity" class="my-3 fw-bold text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Bed" class="form-label">Bed Model</label>
+                    <input asp-for="Bed" class="form-control" placeholder="bed model">
+                    <span asp-validation-for="Bed" class="my-3 fw-bold text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Services" class="form-label">Room Services</label>
+                    <input asp-for="Services" class="form-control" placeholder="room services">
+                    <span asp-validation-for="Services" class="my-3 fw-bold text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Count" class="form-label">Room Count</label>
+                    <input asp-for="Count" class="form-control" placeholder="room count">
+                    <span asp-validation-for="Count" class="my-3 fw-bold text-danger"></span>
+                </div>
+
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-success me-3">Submit</button>
+                    <a asp-area="Admin" asp-controller="Rooms" asp-action="Index" class="btn btn-primary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

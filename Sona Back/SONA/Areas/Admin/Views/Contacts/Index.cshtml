@@ -1,0 +1,49 @@
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Common
+@model X.PagedList.IPagedList<DAL.Models.Comment>
+
+<div class="container">
+    <div class="row justify-content-center py-5">
+        <div class="col-10">
+            <table class="table table-dark table-striped">
+                <thead>
+                <tr>
+                    <th >#</th>
+                    <th >Fullname</th>
+                    <th class="d-flex align-items-center">Email</th>
+                    <th >Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var comment in Model)
+                {
+                    <tr>
+                        <th>@comment.Id</th>
+                        <td>@comment.FullName</td>
+                        <td>@comment.Email</td>
+                        <td>
+                            <a class="btn btn-primary my-2" asp-area="Admin" asp-controller="Contacts" asp-action="Details" asp-route-id="@comment.Id">Details</a>
+                            <a class="btn btn-danger my-2" asp-area="Admin" asp-controller="Contacts" asp-action="Delete" asp-route-id="@comment.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+            <div class="pull-right d-flex justify-content-center">
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index",
+                    new
+                    {
+                        page,
+                        search = Context.Request.Query["search"]
+                    }),
+                    new PagedListRenderOptionsBase
+                    {
+                        LiElementClasses = new string[] { "page-item" },
+                        PageClasses = new string[] { "page-link" },
+                        Display = PagedListDisplayMode.IfNeeded
+                    })
+            </div>
+        </div>
+    </div>
+</div>

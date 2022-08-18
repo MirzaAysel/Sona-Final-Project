@@ -1,0 +1,163 @@
+body {
+  font-family: "Lora", serif;
+}
+body .blog__details .camping {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+  height: 530px;
+  padding-top: 165px;
+  padding-bottom: 80px;
+  text-align: center;
+}
+body .blog__details .camping span {
+  display: inline-block;
+  color: #ffffff;
+  font-size: 12px;
+  letter-spacing: 1px;
+  background: #dfa974;
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+body .blog__details .camping h2 {
+  text-align: center;
+  font-size: 44px;
+  color: #ffffff;
+  line-height: 54px;
+  margin-top: 30px;
+  margin-bottom: 12px;
+}
+body .blog__details .camping .camping__items i {
+  color: #dfa974;
+}
+body .blog__details .camping .camping__items p {
+  color: #dfa974;
+}
+body .blog__info .info__title h4 {
+  color: #19191a;
+  margin-bottom: 20px;
+}
+body .blog__info .info__title p {
+  font-size: 18px;
+  color: #707079;
+  line-height: 30px;
+}
+body .blog__info .img__items {
+  overflow: hidden;
+  margin-bottom: 35px;
+}
+body .blog__info .img__items .img__item {
+  width: calc(33.33% - 10px);
+  float: left;
+  margin-right: 15px;
+}
+body .blog__info .img__items .img__item img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+body .blog__info .blog__info__bottom {
+  overflow: hidden;
+  border-top: 1px solid #ebebeb;
+  padding-top: 30px;
+  margin-bottom: 75px;
+}
+body .blog__info .blog__info__bottom .tags__items__left {
+  float: left;
+}
+body .blog__info .blog__info__bottom .tags__items__left a {
+  font-size: 12px;
+  color: #707079;
+  background: #ebebeb;
+  font-weight: 500;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 2px;
+  transition: all 0.3s;
+  margin-right: 6px;
+  text-decoration: none;
+}
+body .blog__info .blog__info__bottom .tags__items__left a:hover {
+  color: white;
+  background-color: #dfa974;
+}
+body .blog__info .blog__info__bottom .tags__items__right {
+  float: right;
+}
+body .blog__info .blog__info__bottom .tags__items__right span {
+  display: inline-block;
+  font-size: 18px;
+  color: #707079;
+}
+body .blog__info .blog__info__bottom .tags__items__right a {
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  color: #707079;
+  margin-left: 30px;
+}
+body .blog__info .blog__form .form__title {
+  font-size: 24px;
+  color: #19191a;
+  margin-bottom: 1.5px;
+}
+body .blog__info .blog__form .blog__form__btn {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background: #dfa974;
+  border: none;
+  padding: 14px 42px 13px;
+  display: inline-block;
+  border-radius: 2px;
+}
+body .blog__card h2 {
+  text-align: center;
+  font-size: 44px;
+  color: #19191a;
+  line-height: 58px;
+}
+body .blog__card .blog__card__items .card1 {
+  background-repeat: no-repeat;
+  height: 450px;
+  position: relative;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  /*background-image: url(../images/blog-1.jpg);*/
+}
+
+body .blog__card .blog__card__items .blog__card__text {
+  position: absolute;
+  left: 0;
+  bottom: 25px;
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+body .blog__card .blog__card__items .blog__card__text span {
+  display: inline-block;
+  color: #ffffff;
+  font-size: 12px;
+  letter-spacing: 1px;
+  background: #dfa974;
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+body .blog__card .blog__card__items .blog__card__text h4 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 400;
+  font-family: "Lora", serif;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+body .blog__card .blog__card__items .blog__card__text h4 a {
+  color: white;
+  text-decoration: none;
+}
+body .blog__card .blog__card__items .blog__card__text p {
+  font-size: 15px;
+  font-weight: bolder;
+} /*# sourceMappingURL=blog.css.map */

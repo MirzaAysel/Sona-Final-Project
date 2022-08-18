@@ -1,0 +1,225 @@
+@using System.Globalization
+@model DAL.Models.AppUser
+<link rel="stylesheet" href="~/assets/pages/my-room/styles/my-room.style.css">
+<!-- * My Room -->
+<section id="my-rooms">
+    <div class="container py-5">
+        <h1 class="text-center">My Rooms</h1>
+        <div class="bt-option mb-5 text-center">
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <i class="fa-solid fa-angle-right"></i>
+            <span>My Rooms</span>
+        </div>
+        <div class="activity py-5">
+            <div class="px-5">
+                <div class="row justify-content-center">
+                    <div class="col-12 my-3 my-lg-0 col-lg-4">
+                        <div class="single-order pending">
+                            <div class="single-order-flex">
+                                <div class="single-order-contents">
+                                    <span class="single-order-contents-subtitle">
+                                        Pending Reservation
+                                    </span>
+                                    <h2 class="single-order-contents-title">@(Model.Reservations.Where(reservation => DateTime.Compare(DateTime.Parse(reservation.CheckOut.ToString(CultureInfo.InvariantCulture)), DateTime.Now) > 0 && !reservation.IsCancelled).ToList().Count)</h2>
+                                </div>
+                                <div class="single-order-icon">
+                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 my-3 my-lg-0 col-lg-4">
+                        <div class="single-order cancelled">
+                            <div class="single-order-flex">
+                                <div class="single-order-contents">
+                                    <span class="single-order-contents-subtitle">
+                                        Cancelled Reservation
+                                    </span>
+                                    <h2 class="single-order-contents-title">@Model.Reservations.Where(reservation => reservation.IsCancelled).ToList().Count</h2>
+                                </div>
+                                <div class="single-order-icon">
+                                    <i class="fa-solid fa-circle-xmark"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 my-3 my-lg-0 col-lg-4">
+                        <div class="single-order completed">
+                            <div class="single-order-flex">
+                                <div class="single-order-contents">
+                                    <span class="single-order-contents-subtitle">
+                                        Completed Reservation
+                                    </span>
+                                    <h2 class="single-order-contents-title">@(Model.Reservations.Where(reservation => DateTime.Compare(DateTime.Parse(reservation.CheckOut.ToString(CultureInfo.InvariantCulture)), DateTime.Now) < 0 && !reservation.IsCancelled).ToList().Count)</h2>
+                                </div>
+                                <div class="single-order-icon">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="room-list mt-3">
+            <div class="px-5 py-5">
+                @foreach (var reservation in Model.Reservations)
+                {
+                    <div class="room-item px-4 py-3 my-3">
+                        <div class="d-flex justify-content-between">
+                            <div class="single-reservation-content">
+                                <h5 class="single-reservation-content-title">
+                                    Reservation ID
+                                </h5>
+                                <span class="single-reservation-content-id text-primary">
+                                    #@reservation.Id
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="single-reservation-status  @(reservation.IsCancelled ? "cancelled" : DateTime.Compare(DateTime.Parse(reservation.CheckOut.ToString(CultureInfo.InvariantCulture)), DateTime.Now) > 0 && !reservation.IsCancelled ? "pending" : "completed") me-4">
+                                    @(reservation.IsCancelled ? "Cancelled" : DateTime.Compare(DateTime.Parse(reservation.CheckOut.ToString(CultureInfo.InvariantCulture)), DateTime.Now) > 0 ? "Pending" : "Completed")
+                                </div>
+                                <button
+                                    class="btn"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#room-@reservation.Id"
+                                    aria-expanded="false"
+                                    aria-controls="room-@reservation.Id">
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="collapse" id="room-@reservation.Id">
+                            <hr/>
+
+                            <div class="reservation-name">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h2>@reservation.User.FirstName @reservation.User.LastName</h2>
+                                        <p class="text-muted">@reservation.User.Email</p>
+                                    </div>
+                                    <div class="col-6 d-flex flex-column align-items-end">
+                                        <p>Total Bill</p>
+                                        <h3 class="text-primary">$@((reservation.Room.Price*((DateTime.Parse(reservation.CheckOut.ToString()) - DateTime.Parse(reservation.CheckIn.ToString())).Days) - (reservation.Room.Price - reservation.Room.DiscountPrice)*((DateTime.Parse(reservation.CheckOut.ToString()) - DateTime.Parse(reservation.CheckIn.ToString())).Days)))</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr/>
+
+                            <div class="single-reservation-details">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        <span
+                                            class="single-reservation-details-subtitle text-muted">
+                                            Check in
+                                        </span>
+                                        <h5 class="single-reservation-details-title mt-3">
+                                            @reservation.CheckIn.ToString(CultureInfo.InvariantCulture).Substring(0, 10);
+                                        </h5>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        <span
+                                            class="single-reservation-details-subtitle text-muted">
+                                            Check Out
+                                        </span>
+                                        <h5 class="single-reservation-details-title mt-3">
+                                            @reservation.CheckOut.ToString(CultureInfo.InvariantCulture).Substring(0, 10);
+                                        </h5>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        <span
+                                            class="single-reservation-details-subtitle text-muted">
+                                            Guests &amp; Rooms
+                                        </span>
+                                        <h5 class="single-reservation-details-title mt-3">
+                                            @reservation.GuestCount Guests, @reservation.RoomCount Rooms
+                                        </h5>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        <span
+                                            class="single-reservation-details-subtitle text-muted">
+                                            Booked
+                                        </span>
+                                        <h5 class="single-reservation-details-title mt-3">
+                                            @reservation.CreatedDate.ToString(CultureInfo.InvariantCulture).Substring(0, 10);
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr/>
+
+                            <div class="reservation-actions">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h2>@reservation.Room.Name</h2>
+                                    </div>
+                                    <div
+                                        class="col-6 d-flex justify-content-end align-items-center">
+                                        @if (reservation.IsCancelled)
+                                        {
+                                            <button data-bs-toggle="modal"
+                                                    data-bs-target="#cancelModal-@reservation.Id" class="btn">
+                                                <i class="fa-solid fa-circle-info"></i> Delete?
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button data-bs-toggle="modal"
+                                                    data-bs-target="#cancelModal-@reservation.Id" class="btn">
+                                                <i class="fa-solid fa-circle-info"></i> Cancel?
+                                            </button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@foreach (var data in Model.Reservations)
+{
+    <!-- Modal -->
+    <div
+        class="modal fade"
+        id="cancelModal-@data.Id"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@(data.IsCancelled ? "Delete Reservation" : "Cancel Reservation")</h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    @if (data.IsCancelled)
+                    {
+                        <a class="btn btn-danger" asp-controller="MyRooms" asp-action="Delete" asp-route-id="@data.Id">Are you sure?</a>
+                    }
+                    else
+                    {
+                        <a  class="btn btn-danger" asp-controller="MyRooms" asp-action="Cancel" asp-route-id="@data.Id">Are you sure?</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,137 @@
+@model SONA.ViewModels.RoomDetailsVM
+<link rel="stylesheet" href="~/assets/pages/room-details/styles/room-details.style.css">
+<!-- * Room Details -->
+<section id="room-details-section">
+    <div class="container py-5">
+        <h1 class="text-center">@ViewBag.Data.Name</h1>
+        <div class="bt-option mb-5 text-center">
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <i class="fa-solid fa-angle-right"></i>
+            <a asp-controller="Room" asp-action="Index">Rooms</a>
+            <i class="fa-solid fa-angle-right"></i>
+            <span>@ViewBag.Data.Name</span>
+        </div>
+
+        <div class="room-details">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="room-details-item">
+                        <img
+                            src="~/uploads/rooms/@ViewBag.Data.Image"
+                            alt="room"/>
+                        <div class="rd-text">
+                            <div class="rd-title">
+                                <h3>@ViewBag.Data.Name</h3>
+                            </div>
+                            <h2>@ViewBag.Data.Price$<span>/Pernight</span></h2>
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td class="r-o">Size:</td>
+                                    <td>@ViewBag.Data.Size ft</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Capacity:</td>
+                                    <td>Max persion @ViewBag.Data.Capacity</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Bed:</td>
+                                    <td>@ViewBag.Data.Bed</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Services:</td>
+                                    <td>@ViewBag.Data.Services</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <p class="f-para">
+                                Motorhome or Trailer that is the question for you. Here are
+                                some of the advantages and disadvantages of both, so you
+                                will be confident when purchasing an RV. When comparing Rvs,
+                                a motorhome or a travel trailer, should you buy a motorhome
+                                or fifth wheeler? The advantages and disadvantages of both
+                                are studied so that you can make your choice wisely when
+                                purchasing an RV. Possessing a motorhome or fifth wheel is
+                                an achievement of a lifetime. It can be similar to
+                                sojourning with your residence as you search the various
+                                sites of our great land, America.
+                            </p>
+                            <p>
+                                The two commonly known recreational vehicle classes are the
+                                motorized and towable. Towable rvs are the travel trailers
+                                and the fifth wheel. The rv travel trailer or fifth wheel
+                                has the attraction of getting towed by a pickup or a car,
+                                thus giving the adaptability of possessing transportation
+                                for you when you are parked at your campsite.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="room-booking">
+                        <h3>Your Reservation</h3>
+                        <form method="post">
+                            <div class="check-date">
+                                <label asp-for="ReservationVm.CheckIn">Check In:</label>
+                                <input
+                                    asp-for="ReservationVm.CheckIn"
+                                    class="date-input form-control"/>
+                                <span asp-validation-for="ReservationVm.CheckIn" class="text-danger my-3 fw-bold"></span>
+                            </div>
+                            <div class="check-date">
+                                <label asp-for="ReservationVm.CheckOut">Check Out:</label>
+                                <input
+                                    asp-for="ReservationVm.CheckOut"
+                                    class="date-input form-control"/>
+                                <span asp-validation-for="ReservationVm.CheckIn" class="text-danger my-3 fw-bold"></span>
+                            </div>
+                            <div class="select-option">
+                                <label asp-for="ReservationVm.GuestCount">Guests:</label>
+                                <select asp-for="ReservationVm.GuestCount" class="form-select">
+                                    @for (var i = 1; i <= ViewBag.Data.Capacity; i++)
+                                    {
+                                        <option value="@i">@i Adults</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="select-option">
+                                <label asp-for="ReservationVm.RoomCount">Room:</label>
+                                <select asp-for="ReservationVm.RoomCount" class="form-select">
+                                    @for (var i = 1; i <= ViewBag.Data.Count; i++)
+                                    {
+                                        <option value="@i">@i Room</option>
+                                    }
+                                </select>
+                            </div>
+                            <button type="submit" class="btn" asp-controller="Room" asp-action="Details" asp-route-id="@ViewBag.Data.Id">Reservation Now</button>
+                        </form>
+                        <div class="text-danger my-3 fw-bold" asp-validation-summary="All"></div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="review-add py-5 py-lg-0">
+                        <h4>Add Review</h4>
+                        <form method="post" class="ra-form">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input asp-for="Comment.FullName" placeholder="Fullname*"/>
+                                    <span asp-validation-for="Comment.FullName" class="text-danger my-3 fw-bold"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input asp-for="Comment.Email" placeholder="Email*"/>
+                                    <span asp-validation-for="Comment.Email" class="text-danger my-3 fw-bold"></span>
+                                </div>
+                                <div class="col-lg-12">
+                                    <textarea asp-for="Comment.Message" placeholder="Your Review"></textarea>
+                                    <span asp-validation-for="Comment.Message" class="text-danger my-3 fw-bold"></span>
+                                    <button type="submit" asp-controller="Room" asp-action="SubmitComment" asp-route-id="@ViewBag.Data.Id">Submit Now</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- * End Room Details -->

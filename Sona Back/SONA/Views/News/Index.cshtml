@@ -1,0 +1,59 @@
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Common
+@model X.PagedList.IPagedList<DAL.Models.Blog>
+
+<title>News</title>
+<link rel="stylesheet" href="~/assets/pages/News/styles/news.style.css">
+<section id="blogs">
+    <div class="container py-5">
+        <h1 class="text-center">News</h1>
+        <div class="bt-option mb-5 text-center">
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <i class="fa-solid fa-angle-right"></i>
+            <span>News</span>
+        </div>
+        <div class="row">
+            @foreach (var blog in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div
+                        class="blog-item set-bg"
+                        style="
+                                   background-image: url('../uploads/blogs/@blog.Image');
+                                 ">
+                        <div class="bi-text">
+                            <span class="b-tag">@blog.Tag</span>
+                            <h4>
+                                <a asp-controller="News" asp-action="Details" asp-route-id="@blog.Id">@blog.Title</a>
+                            </h4>
+                            <div class="b-time">
+                                <i class="fa-regular fa-clock"></i> @blog.CreatedDate.ToString(CultureInfo.InvariantCulture).Substring(0, 10)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="col-lg-12 mb-4">
+                <div class="room-pagination">
+                    <div class="pull-right d-flex justify-content-center">
+                        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index",
+                            new
+                            {
+                                page,
+                                search = Context.Request.Query["search"]
+                            }),
+                            new PagedListRenderOptionsBase
+                            {
+                                LiElementClasses = new string[] { "page-item" },
+                                PageClasses = new string[] { "page-link" },
+                                Display = PagedListDisplayMode.IfNeeded
+                            })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

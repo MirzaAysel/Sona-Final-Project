@@ -1,0 +1,48 @@
+@model SONA.ViewModels.ChangePasswordVM
+<title>Change Password</title>
+<link rel="stylesheet" href="~/assets/pages/change-password/styles/change-password.style.css">
+<section id="change-password-container">
+    <div class="container py-5">
+        <h1 class="text-center">Change Password</h1>
+        <div class="bt-option mb-5 text-center">
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <i class="fa-solid fa-angle-right"></i>
+            <a asp-controller="MyProfile" asp-action="Index">My Profile</a>
+            <i class="fa-solid fa-angle-right"></i>
+            <span>Change Password</span>
+        </div>
+        <div class="change-password-area py-5">
+            <div class="row justify-content-center">
+                <div class="col-7">
+                    <form method="post">
+                        <div class="input-group flex-column mb-3">
+                            <label asp-for="CurrentPassword">Current Password</label>
+                            <input
+                                asp-for="CurrentPassword"
+                                class="form-control rounded-0 w-100"/>
+                            <span class="my-3 fw-bold text-danger" asp-validation-for="Password"></span>
+                        </div>
+                        <div class="input-group flex-column mb-3">
+                            <label asp-for="Password">Password</label>
+                            <input
+                                asp-for="Password"
+                                class="form-control rounded-0 w-100"/>
+                            <span class="my-3 fw-bold text-danger" asp-validation-for="Password"></span>
+                        </div>
+                        <div class="input-group flex-column mb-3">
+                            <label asp-for="ConfirmPassword">Confirm Password</label>
+                            <input
+                                asp-for="ConfirmPassword"
+                                class="form-control rounded-0 w-100"/>
+                            <span class="my-3 fw-bold text-danger" asp-validation-for="ConfirmPassword"></span>
+                        </div>
+                        <button type="submit" class="btn btn-warning rounded-0 w-100">
+                            Change Password
+                        </button>
+                    </form>
+                    <div class="my-3 text-danger fw-bold" asp-validation-summary="ModelOnly"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

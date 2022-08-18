@@ -1,0 +1,57 @@
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Common
+@model X.PagedList.IPagedList<DAL.Models.Blog>
+
+<div class="container">
+    <div class="row justify-content-center py-5">
+        <div class="col-10">
+            <a class="btn btn-success my-3" asp-area="Admin" asp-controller="Blogs" asp-action="Create">Create</a>
+            <table class="table table-dark table-striped">
+                <thead>
+                <tr>
+                    <th >#</th>
+                    <th >Image</th>
+                    <th class="d-flex align-items-center">Title</th>
+                    <th >Author</th>
+                    <th >Tag</th>
+                      <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var blog in Model)
+                {
+                    <tr>
+                        <th>@blog.Id</th>
+                        <td style="width: 10%;">
+                            <img class="img-fluid" src="~/uploads/blogs/@blog.Image" alt="room">
+                        </td>
+                        <td>@blog.Title</td>
+                        <td>@blog.Author</td>
+                        <td>@blog.Tag</td>
+                        <td>
+                            <a class="btn btn-primary my-2" asp-area="Admin" asp-controller="Blogs" asp-action="Details" asp-route-id="@blog.Id">Details</a>
+                            <a class="btn btn-warning" asp-area="Admin" asp-controller="Blogs" asp-action="Update" asp-route-id="@blog.Id">Update</a>
+                            <a class="btn btn-danger my-2" asp-area="Admin" asp-controller="Blogs" asp-action="Delete" asp-route-id="@blog.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+            <div class="pull-right d-flex justify-content-center">
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index",
+                    new
+                    {
+                        page,
+                        search = Context.Request.Query["search"]
+                    }),
+                    new PagedListRenderOptionsBase
+                    {
+                        LiElementClasses = new string[] { "page-item" },
+                        PageClasses = new string[] { "page-link" },
+                        Display = PagedListDisplayMode.IfNeeded
+                    })
+            </div>
+        </div>
+    </div>
+</div>
